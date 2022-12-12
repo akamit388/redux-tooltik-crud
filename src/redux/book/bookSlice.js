@@ -39,10 +39,10 @@ export const addbook = createAsyncThunk ('book/add', async (bookData, thunkAPI) 
     }
 })
 
-export const updatebook = createAsyncThunk ('update/book', async (data, thunkAPI) => {
+export const updatebook = createAsyncThunk ('book/update', async (data, thunkAPI) => {
     let {updateId, formData} = data;
     try{
-        let res = await axios.post(`http://localhost:3005/books/${updateId}`, formData);
+        let res = await axios.put(`http://localhost:3005/books/${updateId}`, formData);
         return res.data;
     }catch(error){
         console.log(error);
@@ -88,6 +88,16 @@ const bookSlice = createSlice({
         })
         .addCase(addbook.rejected, (state, action)=>{
             state.bookLoading = false
+        })
+        .addCase(updatebook.pending, (state, action) => {
+            state.bookUpdateLoading = true
+        })
+        .addCase(updatebook.fulfilled, (state, action) => {
+            state.bookUpdateLoading = false
+            state.books = state.books.map((book)=>book.id === action.payload.id ? action.payload : book)
+        })
+        .addCase(updatebook.rejected, (state, action)=>{
+            state.bookUpdateLoading = false
         })
     }
 

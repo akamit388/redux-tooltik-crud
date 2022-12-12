@@ -44,7 +44,7 @@ const Home = () => {
                                     <td>{item.id+1}</td>
                                     <td>{item.title}</td>
                                     <td>{item.body}</td>
-                                    <td><button className="btn btn-primary">Edit</button></td>
+                                    <td><Link to={`/update/${item.id}`}><button className="btn btn-primary">Edit</button></Link></td>
                                     <td><button className="btn btn-danger" onClick={()=>deleteHandler(item.id)}>Delete</button></td>
                                 </tr>
                             )

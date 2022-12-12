@@ -3,6 +3,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Add from "./components/Add";
 import Home from "./components/Home";
+import Update from "./components/Update";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />}></Route>
             <Route path="/add" element={<Add />}></Route>
+            <Route path="/update/:updateId" element={<Update/>}></Route>
           </Routes>
         </BrowserRouter>
         
