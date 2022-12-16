@@ -16,7 +16,7 @@ const Home = () => {
 
     const deleteHandler = (id) => {
         dispatch(deletebooks(id));
-    } 
+    }
 
     return (
         <>

@@ -23,6 +23,14 @@ const Add = () => {
     navigate('/');
   }
 
+  const validate = (values) => {
+    const errors = {};
+    if(!values.name){
+      errors.title = "Title is Required";
+    }
+
+  }
+
   return (
     <>
       <p className='mt-5'><Link to='/'>Back to home</Link></p>
@@ -32,6 +40,7 @@ const Add = () => {
             <div className="mb-3">
               <label>Title</label>
               <input type="text" className="form-control" name="title" value={title} placeholder="Title" onChange={onchangeHandler} />
+              <p>{formErrors.title}</p>
             </div>
             <div className="mb-3">
               <label>Body</label>
