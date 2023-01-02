@@ -6,7 +6,6 @@ import { addbook } from '../redux/book/bookSlice';
 const Add = () => {
   let dispatch = useDispatch();
   let navigate = useNavigate();
-
   const [formData, setFormData] = useState({title:'', body:''});
   const {title, body} = formData;
   const [errors, setErrors] = useState({});
@@ -15,37 +14,34 @@ const Add = () => {
     setFormData({...formData, [e.target.name]:e.target.value})
   }
 
-  //console.log(formData)
-
   const formDataHandler = (e) => {
     e.preventDefault();
     setErrors(validation(formData));
 
-    // dispatch(addbook({title,body}));
-    // setFormData({title:'', body:''});
-    // navigate('/');
+    let checkError = validation(formData);
+
+    if(!checkError.title && !checkError.body){
+      dispatch(addbook({title,body}));
+      setFormData({title:'', body:''});
+      navigate('/');
+    }
   }
 
   const validation = (values) => {
-    
     const errors = {};
     if(!values.title){
       errors.title = "Title is Required";
     }else if(values.title.length < 5){
-      errors.title = "Name must be more then 5 charector"
+      errors.title = "Title must be more then 5 charector"
     }
     if(!values.body){
-      errors.body = "Password is Required";
+      errors.body = "Author name is Required";
     }else if(values.body.length < 5){
-      errors.body = "Password must be more then 5 charector"
+      errors.body = "Author name must be more then 5 charector"
     }
     return errors;
   }
 
-  // useEffect(()=>{
-  //   if(Object.keys(errors).length === 0 && (values.title !== "" && values.body !== ""))
-  //   alert("Form Submitted");
-  // }, [errors])
 
   return (
     <>
